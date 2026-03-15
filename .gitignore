@@ -22,3 +22,7 @@ npm-debug.log*
 .DS_Store
 .vscode
 */.vscode
+
+# Documentation (keep only README.md in repo)
+*.md
+!README.md
