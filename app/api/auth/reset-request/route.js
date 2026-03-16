@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getUserByEmail, createResetCode } from "@/lib/auth";
-import nodemailer from "nodemailer";
+import { sendEmail } from "@/lib/email";
 
 export async function POST(request) {
   try {
@@ -12,23 +12,13 @@ export async function POST(request) {
 
     const user = getUserByEmail(email);
 
-    // Always return success to prevent email enumeration
     if (!user) {
       return NextResponse.json({ success: true, message: "If the email exists, a reset code has been sent." });
     }
 
     const code = createResetCode(user.id);
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+    await sendEmail({
       to: email,
       subject: "Portfolio Admin - Password Reset Code",
       text: `Your password reset code is: ${code}\n\nThis code expires in 15 minutes.\n\nIf you did not request this, please ignore this email.`,
@@ -48,6 +38,6 @@ export async function POST(request) {
     return NextResponse.json({ success: true, message: "If the email exists, a reset code has been sent." });
   } catch (error) {
     console.error("Reset request error:", error);
-    return NextResponse.json({ error: "Failed to send reset code" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to send reset code. Please try again." }, { status: 500 });
   }
 }
