@@ -10,7 +10,7 @@ const Navbar = ({ activeSection, setActiveSection, isDarkMode, toggleDarkMode })
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
         <button
           onClick={() => document.getElementById("home")?.scrollIntoView({ behavior: "smooth" })}
-          className="cursor-pointer rounded-full overflow-hidden ring-2 ring-blue-600 dark:ring-blue-400 transition-transform duration-300 hover:scale-110"
+          className="cursor-pointer rounded-full overflow-hidden ring-2 ring-primary-600 dark:ring-primary-400 transition-transform duration-300 hover:scale-110"
           aria-label="Go to Home"
           style={{ width: 80, height: 80 }}
         >
@@ -34,7 +34,7 @@ const Navbar = ({ activeSection, setActiveSection, isDarkMode, toggleDarkMode })
                 }}
                 className={`capitalize transition-colors duration-300 ${
                   activeSection === section
-                    ? "text-blue-600 dark:text-blue-400 font-semibold"
+                    ? "text-primary-600 dark:text-primary-400 font-semibold"
                     : "text-gray-700 dark:text-gray-300"
                 }`}
               >

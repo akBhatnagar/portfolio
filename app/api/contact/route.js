@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { sendEmail } from "@/lib/email";
 
 export async function POST(request) {
   try {
@@ -12,19 +12,19 @@ export async function POST(request) {
       );
     }
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
+    await sendEmail({
+      to: process.env.EMAIL_USER || "akshaybhatnagar1998@gmail.com",
       subject: `Portfolio Message from ${name}`,
       text: `You received a message from your portfolio contact form.\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+      html: `
+        <div style="font-family: sans-serif; max-width: 500px; margin: 0 auto; padding: 20px;">
+          <h2 style="color: #1e40af;">New Contact Form Message</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 16px 0;" />
+          <p>${message.replace(/\n/g, "<br>")}</p>
+        </div>
+      `,
     });
 
     return NextResponse.json({ success: true, message: "Message sent!" });

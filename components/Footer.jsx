@@ -11,7 +11,7 @@ const Footer = ({ className = "" }) => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
+            className="hover:text-primary-600 dark:hover:text-primary-400 transition"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@ const Footer = ({ className = "" }) => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="hover:text-blue-700 dark:hover:text-blue-500 transition"
+            className="hover:text-primary-700 dark:hover:text-primary-500 transition"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ const Footer = ({ className = "" }) => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Twitter"
-            className="hover:text-blue-500 dark:hover:text-blue-400 transition"
+            className="hover:text-primary-500 dark:hover:text-primary-400 transition"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

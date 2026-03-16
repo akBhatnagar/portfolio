@@ -54,7 +54,7 @@ const Contact = () => {
             onChange={handleChange}
             required
             disabled={isLoading}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-400 dark:text-white"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-400 dark:text-white"
           />
         </div>
         <div>
@@ -69,7 +69,7 @@ const Contact = () => {
             onChange={handleChange}
             required
             disabled={isLoading}
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-400 dark:text-white"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-400 dark:text-white"
           />
         </div>
         <div>
@@ -84,14 +84,14 @@ const Contact = () => {
             onChange={handleChange}
             required
             disabled={isLoading}
-            className="w-full px-4 py-2 border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-400 dark:text-white"
+            className="w-full px-4 py-2 border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-400 dark:text-white"
           />
         </div>
         <button
           type="submit"
           disabled={isLoading}
           className={`w-full py-3 rounded-md text-white transition flex items-center justify-center ${
-            isLoading ? "bg-blue-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+            isLoading ? "bg-primary-400 cursor-not-allowed" : "bg-primary-600 hover:bg-primary-700"
           }`}
         >
           {isLoading ? (
