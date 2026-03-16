@@ -28,6 +28,10 @@ npm-debug.log*
 *.db-wal
 *.db-shm
 
+# Uploaded data
+data/uploads/*
+!data/uploads/.gitkeep
+
 # Documentation (keep only README.md in repo)
 *.md
 !README.md

@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-
 const Navbar = ({ activeSection, setActiveSection, isDarkMode, toggleDarkMode }) => {
   const sections = ["home", "about", "projects", "contact"];
 
@@ -14,13 +12,12 @@ const Navbar = ({ activeSection, setActiveSection, isDarkMode, toggleDarkMode })
           aria-label="Go to Home"
           style={{ width: 80, height: 80 }}
         >
-          <Image
-            src="/memoji.png"
+          <img
+            src="/api/icon"
             alt="Akshay Logo"
             width={80}
             height={80}
-            className="object-cover"
-            priority
+            className="object-cover w-full h-full"
           />
         </button>
 

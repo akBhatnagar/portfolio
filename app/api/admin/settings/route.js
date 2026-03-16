@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { validateSession } from "@/lib/auth";
 import { getContent, setContent } from "@/lib/db";
-import { getAllThemes } from "@/lib/themes";
+import { getAllThemes, isCustomTheme, getCustomHex } from "@/lib/themes";
 
 async function authenticate() {
   const cookieStore = await cookies();
@@ -18,8 +18,10 @@ export async function GET() {
     const showGithubLinks = getContent("show_github_links") ?? false;
     const colorTheme = getContent("color_theme") || "blue";
     const themes = getAllThemes();
+    const customColor = isCustomTheme(colorTheme) ? getCustomHex(colorTheme) : null;
+    const navbarIcon = getContent("navbar_icon") || null;
 
-    return NextResponse.json({ showGithubLinks, colorTheme, themes });
+    return NextResponse.json({ showGithubLinks, colorTheme, themes, customColor, navbarIcon });
   } catch (error) {
     console.error("Get settings error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
@@ -38,17 +40,27 @@ export async function PUT(request) {
     }
 
     if (body.colorTheme) {
-      const validThemes = getAllThemes().map((t) => t.key);
-      if (!validThemes.includes(body.colorTheme)) {
+      const validPresets = getAllThemes().map((t) => t.key);
+      if (validPresets.includes(body.colorTheme)) {
+        setContent("color_theme", body.colorTheme);
+      } else {
         return NextResponse.json({ error: "Invalid theme" }, { status: 400 });
       }
-      setContent("color_theme", body.colorTheme);
+    }
+
+    if (body.customColor) {
+      const hex = body.customColor.replace("#", "");
+      if (!/^[0-9a-fA-F]{6}$/.test(hex)) {
+        return NextResponse.json({ error: "Invalid hex color" }, { status: 400 });
+      }
+      setContent("color_theme", `custom:#${hex}`);
     }
 
     const showGithubLinks = getContent("show_github_links") ?? false;
     const colorTheme = getContent("color_theme") || "blue";
+    const customColor = isCustomTheme(colorTheme) ? getCustomHex(colorTheme) : null;
 
-    return NextResponse.json({ showGithubLinks, colorTheme });
+    return NextResponse.json({ showGithubLinks, colorTheme, customColor });
   } catch (error) {
     console.error("Update settings error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
